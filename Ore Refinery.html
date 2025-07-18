@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ingot Refining Calculator - Medium & Large Refineries</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: center;
+    }
+    input[type="number"] {
+      width: 80px;
+    }
+    .unused {
+      color: gray;
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+    th {
+      background-color: #e0e0e0;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ingot Refining Calculator</h1>
+
+  <!-- Medium Refinery Table -->
+  <h2>Medium Refinery</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Ingot Type</th>
+        <th>Input (Desired Ingots)</th>
+        <th>Time (mm:ss)</th>
+        <th>Water</th>
+        <th>Copper Ore</th>
+        <th>Iron Ore / Ingots</th>
+        <th>Carbon Ore</th>
+        <th>Aluminum Ore / Ingots</th>
+        <th>Jasmium Crystals</th>
+        <th>Titanium Ore</th>
+        <th>Stravidium Fibers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Copper Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateMedium()" id="m_copperInput" /></td>
+        <td id="m_copper_time"></td>
+        <td class="unused">X</td>
+        <td id="m_copper_copperOre"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+      </tr>
+
+      <tr>
+        <td>Iron Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateMedium()" id="m_ironInput" /></td>
+        <td id="m_iron_time"></td>
+        <td id="m_iron_water"></td> <!-- Fixed: added id here -->
+        <td class="unused">X</td>
+        <td id="m_iron_ironOre"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+      </tr>
+
+      <tr>
+        <td>Steel Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateMedium()" id="m_steelInput" /></td>
+        <td id="m_steel_time"></td>
+        <td id="m_steel_water"></td>
+        <td class="unused">X</td>
+        <td id="m_steel_ironIngot"></td>
+        <td id="m_steel_carbonOre"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+      </tr>
+
+      <tr>
+        <td>Aluminum Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateMedium()" id="m_aluminumInput" /></td>
+        <td id="m_aluminum_time"></td>
+        <td id="m_aluminum_water"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td id="m_aluminum_aluminumOre"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+      </tr>
+
+      <tr>
+        <td>Duraluminum Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateMedium()" id="m_duraluminumInput" /></td>
+        <td id="m_duraluminum_time"></td>
+        <td id="m_duraluminum_water"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td id="m_duraluminum_aluminumIngot"></td>
+        <td id="m_duraluminum_jasmium"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+      </tr>
+
+      <tr>
+        <td>Plastanium Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateMedium()" id="m_plastaniumInput" /></td>
+        <td id="m_plastanium_time"></td>
+        <td id="m_plastanium_water"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td id="m_plastanium_titanium"></td>
+        <td id="m_plastanium_stravidium"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br><br>
+
+  <!-- Large Refinery Table -->
+  <h2>Large Refinery</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Ingot Type</th>
+        <th>Input (Desired Ingots)</th>
+        <th>Time (mm:ss)</th>
+        <th>Water</th>
+        <th>Copper Ore</th>
+        <th>Iron Ore / Ingots</th>
+        <th>Carbon Ore</th>
+        <th>Aluminum Ore / Ingots</th>
+        <th>Jasmium Crystals</th>
+        <th>Titanium Ore</th>
+        <th>Stravidium Fibers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Copper Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateLarge()" id="l_copperInput" /></td>
+        <td id="l_copper_time"></td>
+        <td class="unused">X</td>
+        <td id="l_copper_copperOre"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+      </tr>
+
+      <tr>
+        <td>Iron Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateLarge()" id="l_ironInput" /></td>
+        <td id="l_iron_time"></td>
+        <td id="l_iron_water"></td> <!-- Added id for water here to match medium -->
+        <td class="unused">X</td>
+        <td id="l_iron_ironOre"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+      </tr>
+
+      <tr>
+        <td>Steel Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateLarge()" id="l_steelInput" /></td>
+        <td id="l_steel_time"></td>
+        <td id="l_steel_water"></td>
+        <td class="unused">X</td>
+        <td id="l_steel_ironIngot"></td>
+        <td id="l_steel_carbonOre"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+      </tr>
+
+      <tr>
+        <td>Aluminum Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateLarge()" id="l_aluminumInput" /></td>
+        <td id="l_aluminum_time"></td>
+        <td id="l_aluminum_water"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td id="l_aluminum_aluminumOre"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+      </tr>
+
+      <tr>
+        <td>Duraluminum Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateLarge()" id="l_duraluminumInput" /></td>
+        <td id="l_duraluminum_time"></td>
+        <td id="l_duraluminum_water"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td id="l_duraluminum_aluminumIngot"></td>
+        <td id="l_duraluminum_jasmium"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+      </tr>
+
+      <tr>
+        <td>Plastanium Ingot</td>
+        <td><input type="number" value="1" min="0" oninput="calculateLarge()" id="l_plastaniumInput" /></td>
+        <td id="l_plastanium_time"></td>
+        <td id="l_plastanium_water"></td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td class="unused">X</td>
+        <td id="l_plastanium_titanium"></td>
+        <td id="l_plastanium_stravidium"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // Helper: format seconds to mm:ss
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+      const s = (seconds % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function calculateMedium() {
+      // Inputs
+      const copper = Number(document.getElementById('m_copperInput').value) || 0;
+      const iron = Number(document.getElementById('m_ironInput').value) || 0;
+      const steel = Number(document.getElementById('m_steelInput').value) || 0;
+      const aluminum = Number(document.getElementById('m_aluminumInput').value) || 0;
+      const duraluminum = Number(document.getElementById('m_duraluminumInput').value) || 0;
+      const plastanium = Number(document.getElementById('m_plastaniumInput').value) || 0;
+
+      // Copper Ingot (4s per ingot)
+      document.getElementById('m_copper_time').textContent = formatTime(copper * 4);
+      document.getElementById('m_copper_copperOre').textContent = copper * 3;
+
+      // Iron Ingot (5s per ingot)
+      document.getElementById('m_iron_time').textContent = formatTime(iron * 5);
+      document.getElementById('m_iron_water').textContent = iron * 25;
+      document.getElementById('m_iron_ironOre').textContent = iron * 3;
+
+      // Steel Ingot (6s per ingot)
+      document.getElementById('m_steel_time').textContent = formatTime(steel * 3);
+      document.getElementById('m_steel_water').textContent = steel * 15;
+      document.getElementById('m_steel_ironIngot').textContent = steel * 1;
+      document.getElementById('m_steel_carbonOre').textContent = steel * 4;
+
+      // Aluminum Ingot (30s per ingot)
+      document.getElementById('m_aluminum_time').textContent = formatTime(aluminum * 30);
+      document.getElementById('m_aluminum_water').textContent = aluminum * 200;
+      document.getElementById('m_aluminum_aluminumOre').textContent = aluminum * 7;
+
+      // Duraluminum Ingot (5s per ingot)
+      document.getElementById('m_duraluminum_time').textContent = formatTime(duraluminum * 5);
+      document.getElementById('m_duraluminum_water').textContent = duraluminum * 500;
+      document.getElementById('m_duraluminum_aluminumIngot').textContent = duraluminum * 1;
+      document.getElementById('m_duraluminum_jasmium').textContent = duraluminum * 4;
+
+      // Plastanium Ingot (30s per ingot)
+      document.getElementById('m_plastanium_time').textContent = formatTime(plastanium * 30);
+      document.getElementById('m_plastanium_water').textContent = plastanium * 1250;
+      document.getElementById('m_plastanium_titanium').textContent = plastanium * 6;
+      document.getElementById('m_plastanium_stravidium').textContent = plastanium * 1;
+    }
+
+    function calculateLarge() {
+      const copper = Number(document.getElementById('l_copperInput').value) || 0;
+      const iron = Number(document.getElementById('l_ironInput').value) || 0;
+      const steel = Number(document.getElementById('l_steelInput').value) || 0;
+      const aluminum = Number(document.getElementById('l_aluminumInput').value) || 0;
+      const duraluminum = Number(document.getElementById('l_duraluminumInput').value) || 0;
+      const plastanium = Number(document.getElementById('l_plastaniumInput').value) || 0;
+
+      // Copper Ingot (12s per ingot)
+      document.getElementById('l_copper_time').textContent = formatTime(copper * 12);
+      document.getElementById('l_copper_copperOre').textContent = copper * 30;
+
+      // Iron Ingot (18s per ingot)
+      document.getElementById('l_iron_time').textContent = formatTime(iron * 18);
+      document.getElementById('l_iron_water').textContent = iron * 15;
+      document.getElementById('l_iron_ironOre').textContent = iron * 25;
+
+      // Steel Ingot (35s per ingot)
+      document.getElementById('l_steel_time').textContent = formatTime(steel * 35);
+      document.getElementById('l_steel_water').textContent = steel * 10;
+      document.getElementById('l_steel_ironIngot').textContent = steel * 2;
+      document.getElementById('l_steel_carbonOre').textContent = steel * 6;
+
+      // Aluminum Ingot (25s per ingot)
+      document.getElementById('l_aluminum_time').textContent = formatTime(aluminum * 25);
+      document.getElementById('l_aluminum_water').textContent = aluminum * 15;
+      document.getElementById('l_aluminum_aluminumOre').textContent = aluminum * 30;
+
+      // Duraluminum Ingot (50s per ingot)
+      document.getElementById('l_duraluminum_time').textContent = formatTime(duraluminum * 50);
+      document.getElementById('l_duraluminum_water').textContent = duraluminum * 20;
+      document.getElementById('l_duraluminum_aluminumIngot').textContent = duraluminum * 3;
+      document.getElementById('l_duraluminum_jasmium').textContent = duraluminum * 2;
+
+      // Plastanium Ingot (75s per ingot)
+      document.getElementById('l_plastanium_time').textContent = formatTime(plastanium * 75);
+      document.getElementById('l_plastanium_water').textContent = plastanium * 25;
+      document.getElementById('l_plastanium_titanium').textContent = plastanium * 3;
+      document.getElementById('l_plastanium_stravidium').textContent = plastanium * 5;
+    }
+
+    // Run both calculations once page loads
+    window.onload = () => {
+      calculateMedium();
+      calculateLarge();
+    };
+  </script>
+</body>
+</html>

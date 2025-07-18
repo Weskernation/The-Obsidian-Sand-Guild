@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Factory Power Table</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: center;
+    }
+    th.category-header {
+      background-color: #ddd;
+      font-size: 1.2em;
+      text-align: left;
+    }
+    .summary {
+      font-weight: bold;
+      font-size: 1.3em;
+      padding: 10px;
+    }
+    #totalPower {
+      font-size: 1.6em;
+    }
+    .green {
+      color: green;
+    }
+    .red {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Factory Power Usage</h1>
+
+  <div class="summary">
+    Total Objects Used: <span id="totalObjects">0</span> / 80
+  </div>
+
+  <table id="mainTable">
+
+    <!-- Refiners -->
+    <tr><th colspan="3" class="category-header">Refiners</th></tr>
+    <tr>
+      <th>Item</th>
+      <th>Amount</th>
+      <th>Max Power Consumption</th>
+    </tr>
+    <tr><td>Blood Purifier</td><td><input type="number" min="0" value="0" class="input" data-power="10"></td><td class="power">0</td></tr>
+    <tr><td>Improved Blood Purifier</td><td><input type="number" min="0" value="1" class="input" data-power="35"></td><td class="power">0</td></tr>
+    <tr><td>Small Ore Refinery</td><td><input type="number" min="0" value="0" class="input" data-power="15"></td><td class="power">0</td></tr>
+    <tr><td>Medium Ore Refinery</td><td><input type="number" min="0" value="0" class="input" data-power="45"></td><td class="power">0</td></tr>
+    <tr><td>Large Ore Refinery</td><td><input type="number" min="0" value="4" class="input" data-power="350"></td><td class="power">0</td></tr>
+    <tr><td>Small Chemical Refinery</td><td><input type="number" min="0" value="1" class="input" data-power="15"></td><td class="power">0</td></tr>
+    <tr><td>Medium Chemical Refinery</td><td><input type="number" min="0" value="3" class="input" data-power="350"></td><td class="power">0</td></tr>
+    <tr><td>Spice Refinery</td><td><input type="number" min="0" value="0" class="input" data-power="200"></td><td class="power">0</td></tr>
+    <tr><td>Medium Spice Refinery</td><td><input type="number" min="0" value="1" class="input" data-power="350"></td><td class="power">0</td></tr>
+    <tr><td>Large Spice Refinery</td><td><input type="number" min="0" value="1" class="input" data-power="500"></td><td class="power">0</td></tr>
+
+    <!-- Water -->
+    <tr><th colspan="3" class="category-header">Water</th></tr>
+    <tr><td>Fremen Deathstill</td><td><input type="number" min="0" value="0" class="input" data-power="200"></td><td class="power">0</td></tr>
+    <tr><td>Advanced Fremen Deathstill</td><td><input type="number" min="0" value="5" class="input" data-power="350"></td><td class="power">0</td></tr>
+    <tr><td>Windtrap (Gather Rate: 0.75)</td><td><input type="number" min="0" value="0" class="input" data-power="75"></td><td class="power">0</td></tr>
+    <tr><td>Large Windtrap (Gather Rate: 1.75)</td><td><input type="number" min="0" value="5" class="input" data-power="135"></td><td class="power">0</td></tr>
+
+    <!-- Fabricators -->
+    <tr><th colspan="3" class="category-header">Fabricators</th></tr>
+    <tr><td>(General) Fabricator</td><td><input type="number" min="0" value="1" class="input" data-power="10"></td><td class="power">0</td></tr>
+    <tr><td>Survival Fabricator</td><td><input type="number" min="0" value="1" class="input" data-power="40"></td><td class="power">0</td></tr>
+    <tr><td>Advanced Survival Fabricator</td><td><input type="number" min="0" value="1" class="input" data-power="150"></td><td class="power">0</td></tr>
+    <tr><td>Garment Fabricator</td><td><input type="number" min="0" value="1" class="input" data-power="40"></td><td class="power">0</td></tr>
+    <tr><td>Advanced Garment Fabricator</td><td><input type="number" min="0" value="1" class="input" data-power="150"></td><td class="power">0</td></tr>
+    <tr><td>Weapons Fabricator</td><td><input type="number" min="0" value="1" class="input" data-power="40"></td><td class="power">0</td></tr>
+    <tr><td>Advanced Weapons Fabricator</td><td><input type="number" min="0" value="1" class="input" data-power="150"></td><td class="power">0</td></tr>
+    <tr><td>Vehicles Fabricator</td><td><input type="number" min="0" value="1" class="input" data-power="40"></td><td class="power">0</td></tr>
+    <tr><td>Advanced Vehicle Fabricator</td><td><input type="number" min="0" value="1" class="input" data-power="150"></td><td class="power">0</td></tr>
+
+    <!-- Other Power Consumers -->
+    <tr><th colspan="3" class="category-header">Other Power Consumers</th></tr>
+    <tr><td>Repair Station</td><td><input type="number" min="0" value="1" class="input" data-power="20"></td><td class="power">0</td></tr>
+    <tr><td>Recycler</td><td><input type="number" min="0" value="1" class="input" data-power="15"></td><td class="power">0</td></tr>
+    <tr><td>(Advanced)Sub-Fief Console</td><td><input type="number" min="0" value="1" class="input no-count" data-power="15"></td><td class="power">0</td></tr>
+
+    <!-- Pentashield -->
+    <tr><th colspan="3" class="category-header">Vertical and Horizontal Pentashield</th></tr>
+    <tr><td>Pentashield Surface Vertical (per tile)</td><td><input type="number" min="0" value="51" class="input no-count" data-power="6"></td><td class="power">0</td></tr>
+    <tr><td>Pentashield Surface Horizontal (per tile)</td><td><input type="number" min="0" value="118" class="input no-count" data-power="3"></td><td class="power">0</td></tr>
+    <tr><td>Other (e.g. doors that need power)</td><td><input type="number" min="0" value="5" class="input no-count" data-power="1"></td><td class="power">0</td></tr>
+
+    <!-- Total Power Consumed -->
+    <tr>
+      <td colspan="2" class="summary">Total Power Consumed:</td>
+      <td class="summary" id="totalPower">0</td>
+    </tr>
+  </table>
+
+  <!-- Generators Table -->
+  <table id="generatorTable">
+    <tr><th colspan="3" class="category-header">Generators</th></tr>
+    <tr>
+      <th>Generator</th>
+      <th>Amount</th>
+      <th>Max Power Production</th>
+    </tr>
+    <tr>
+      <td>Fuel-Powered Generator</td>
+      <td><input type="number" min="0" value="1" id="fuelGen" data-power="75"></td>
+      <td class="genPower" id="fuelPower">0</td>
+    </tr>
+    <tr>
+      <td>Wind Turbine Omnidirectional</td>
+      <td><input type="number" min="0" value="46" id="omniGen" data-power="150"></td>
+      <td class="genPower" id="omniPower">0</td>
+    </tr>
+    <tr>
+      <td>Wind Turbine Directional</td>
+      <td><input type="number" min="0" value="1" id="dirGen" data-power="350"></td>
+      <td class="genPower" id="dirPower">0</td>
+    </tr>
+    <tr>
+      <td>Spice-Powered Generator</td>
+      <td><input type="number" min="0" value="0" id="spiceGen" data-power="1000"></td>
+      <td class="genPower" id="spicePower">0</td>
+    </tr>
+  </table>
+
+  <script>
+    const maxTotalObjects = 80;
+
+    const inputs = [...document.querySelectorAll('.input')].filter(input => !input.classList.contains('no-count'));
+    const powerCells = [...document.querySelectorAll('.power')];
+    const noCountInputs = [...document.querySelectorAll('.input.no-count')];
+
+    const genInputs = [
+      document.getElementById('fuelGen'),
+      document.getElementById('omniGen'),
+      document.getElementById('dirGen'),
+      document.getElementById('spiceGen')
+    ];
+    const genPowerCells = [
+      document.getElementById('fuelPower'),
+      document.getElementById('omniPower'),
+      document.getElementById('dirPower'),
+      document.getElementById('spicePower')
+    ];
+
+    const genPowers = [75, 150, 350, 1000];
+
+    const totalPowerDisplay = document.getElementById('totalPower');
+    const totalObjectsDisplay = document.getElementById('totalObjects');
+
+    function updateTable() {
+      let totalConsumedPower = 0;
+      let totalObjectsCount = 0;
+
+      inputs.forEach((input, i) => {
+        const qty = parseInt(input.value) || 0;
+        const power = parseInt(input.dataset.power);
+        const consumed = qty * power;
+        powerCells[i].textContent = consumed;
+        totalConsumedPower += consumed;
+        totalObjectsCount += qty;
+      });
+
+      noCountInputs.forEach(input => {
+        const qty = parseInt(input.value) || 0;
+        const power = parseInt(input.dataset.power);
+        const consumed = qty * power;
+        const powerCell = input.parentElement.nextElementSibling;
+        if (powerCell && powerCell.classList.contains('power')) {
+          powerCell.textContent = consumed;
+        }
+        totalConsumedPower += consumed;
+      });
+
+      genInputs.forEach((input, idx) => {
+        const count = parseInt(input.value) || 0;
+        genPowerCells[idx].textContent = count * genPowers[idx];
+      });
+
+      const totalProducedPower = genInputs.reduce((acc, input, idx) => {
+        return acc + (parseInt(input.value) || 0) * genPowers[idx];
+      }, 0);
+
+      totalPowerDisplay.textContent = totalConsumedPower + " / " + totalProducedPower;
+      totalPowerDisplay.className = totalProducedPower >= totalConsumedPower ? 'green' : 'red';
+
+      const totalObjects = totalObjectsCount + genInputs.reduce((acc, input) => acc + (parseInt(input.value) || 0), 0);
+      totalObjectsDisplay.textContent = totalObjects;
+      totalObjectsDisplay.style.color = totalObjects > maxTotalObjects ? 'red' : 'black';
+    }
+
+    [...inputs, ...noCountInputs, ...genInputs].forEach(input => {
+      input.addEventListener('input', updateTable);
+    });
+
+    updateTable();
+  </script>
+
+</body>
+</html>
